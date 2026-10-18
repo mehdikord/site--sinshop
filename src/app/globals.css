@@ -42,6 +42,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  overflow-x: clip;
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);

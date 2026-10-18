@@ -22,9 +22,9 @@ export default function ProductCard({ p, priority = false }: { p: Product; prior
         </div>
         {p.stock === 0 && <span className="absolute bottom-3 left-3 rounded-full bg-ink/80 px-2.5 py-1 text-xs font-bold text-white">ناموجود</span>}
       </Link>
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
         <span className="text-[11px] font-semibold text-muted">{categoryMap[p.category].name} · {p.brand}</span>
-        <Link href={`/products/${p.id}`} className="line-clamp-2 font-bold leading-6 hover:text-coral">{p.title}</Link>
+        <Link href={`/products/${p.id}`} className="line-clamp-2 text-sm font-bold leading-6 hover:text-coral sm:text-base">{p.title}</Link>
         <Rating value={p.rating} count={p.reviewCount} />
         <div className="mt-auto flex items-end justify-between gap-2 pt-2">
           <Price price={p.price} discount={p.discount} />
@@ -32,7 +32,7 @@ export default function ProductCard({ p, priority = false }: { p: Product; prior
             onClick={() => add(p.id)}
             disabled={p.stock === 0}
             aria-label="افزودن به سبد"
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white transition hover:bg-coral active:scale-90 disabled:opacity-30"
+            className="grid size-9 shrink-0 place-items-center rounded-full sm:size-10 bg-ink text-white transition hover:bg-coral active:scale-90 disabled:opacity-30"
           >
             <ShoppingBag className="size-4" />
           </button>

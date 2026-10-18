@@ -69,12 +69,12 @@ export default function Catalog() {
         <h1 className="text-3xl font-black">{activeCat ? `${activeCat.emoji} ${activeCat.name}` : deal ? "🔥 تخفیف‌های ویژه" : q ? `نتایج جستجو برای «${q}»` : "همه محصولات"}</h1>
         <p className="mt-1 text-sm text-muted">{faNum(list.length)} محصول</p>
       </div>
-      <div className="grid gap-8 lg:grid-cols-[16rem_1fr]">
+      <div className="grid gap-8 lg:grid-cols-[16rem_minmax(0,1fr)]">
         <aside className="hidden lg:block"><div className="card sticky top-24 p-5">{Filters}</div></aside>
-        <div>
+        <div className="min-w-0">
           <div className="mb-5 flex items-center justify-between gap-3">
-            <button onClick={() => setOpen(true)} className="btn-ghost !py-2 lg:hidden"><SlidersHorizontal className="size-4" /> فیلترها</button>
-            <div className="no-scrollbar flex gap-2 overflow-x-auto">
+            <button onClick={() => setOpen(true)} className="btn-ghost shrink-0 !px-4 !py-2 lg:hidden"><SlidersHorizontal className="size-4" /> فیلترها</button>
+            <div className="no-scrollbar flex min-w-0 flex-1 gap-2 overflow-x-auto">
               {sorts.map((s) => (
                 <button key={s.k} onClick={() => set("sort", s.k)} className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-bold transition ${sort === s.k ? "bg-coral text-white" : "bg-white hover:bg-blush"}`}>{s.l}</button>
               ))}
@@ -91,7 +91,7 @@ export default function Catalog() {
       </div>
       {open && (
         <div className="fixed inset-0 z-[60] bg-ink/40 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)}>
-          <div className="absolute inset-y-0 right-0 w-80 overflow-y-auto bg-cream p-6" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute inset-y-0 right-0 w-[85vw] max-w-80 overflow-y-auto bg-cream p-6" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setOpen(false)} className="mb-4 grid size-9 place-items-center rounded-full bg-white"><X className="size-4" /></button>
             {Filters}
           </div>
