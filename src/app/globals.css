@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: var(--font-vazir), system-ui, sans-serif;
+  --font-display: var(--font-lalezar), var(--font-vazir), system-ui, sans-serif;
   --color-cream: #fff8f1;
   --color-ink: #2b2140;
   --color-muted: #7a7190;
@@ -21,6 +22,46 @@
   --animate-wiggle: wiggle 3s ease-in-out infinite;
   --animate-marquee: marquee 40s linear infinite;
   --animate-shine: shine 2.6s linear infinite;
+  --animate-drift: drift 60s linear infinite;
+  --animate-snow: snow 14s linear infinite;
+  --animate-sway: sway 4s ease-in-out infinite;
+  --animate-bob: bob 3s ease-in-out infinite;
+  --animate-rise: rise 18s linear infinite;
+  --animate-twinkle: twinkle 2.4s ease-in-out infinite;
+  --animate-jelly: jelly 0.7s ease;
+  @keyframes drift {
+    from { transform: translateX(-30vw); }
+    to { transform: translateX(130vw); }
+  }
+  @keyframes snow {
+    from { transform: translateY(-10%) rotate(0deg); }
+    to { transform: translateY(110vh) rotate(360deg); }
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes rise {
+    0% { transform: translateY(0) rotate(-4deg); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translateY(-50vh) rotate(4deg); }
+    90% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(-4deg); opacity: 0; }
+  }
+  @keyframes twinkle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.6); opacity: 0.5; }
+  }
+  @keyframes jelly {
+    0%, 100% { transform: scale(1, 1); }
+    30% { transform: scale(1.18, 0.82); }
+    50% { transform: scale(0.88, 1.12); }
+    70% { transform: scale(1.06, 0.95); }
+  }
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(-2deg); }
     50% { transform: translateY(-18px) rotate(2deg); }
@@ -30,8 +71,8 @@
     50% { transform: rotate(3deg); }
   }
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(50%); }
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
   }
   @keyframes shine {
     from { background-position: 200% center; }
@@ -39,7 +80,7 @@
   }
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 body {
   overflow-x: clip;
@@ -60,6 +101,15 @@ body {
 @utility btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none bg-ink text-white hover:bg-ink/90 hover:-translate-y-0.5; }
 @utility btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none bg-white text-ink ring-1 ring-ink/10 hover:ring-ink/30 hover:-translate-y-0.5; }
 
+/* chunky "toy block" look: thick outline + hard offset shadow */
+@utility toy {
+  @apply rounded-[1.75rem] ring-[3px] ring-ink shadow-[0_6px_0_var(--color-ink)] transition-all duration-200;
+}
+@utility toy-hover {
+  @apply hover:-translate-y-1 hover:shadow-[0_10px_0_var(--color-ink)] active:translate-y-1 active:shadow-[0_2px_0_var(--color-ink)];
+}
+@utility font-display { font-family: var(--font-display); font-weight: 400; }
+
 @utility card { @apply rounded-3xl bg-white shadow-soft; }
 
 .text-shine {
@@ -73,6 +123,18 @@ body {
 
 .blob {
   border-radius: 46% 54% 60% 40% / 45% 50% 50% 55%;
+}
+
+.bg-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 9%, transparent) 2px, transparent 2px);
+  background-size: 22px 22px;
+}
+.bg-candy {
+  background: repeating-linear-gradient(-45deg, var(--color-coral) 0 22px, #ff8577 22px 44px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }

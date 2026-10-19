@@ -1,33 +1,35 @@
 import Hero from "@/components/home/Hero";
+import FunRibbon from "@/components/home/FunRibbon";
 import Categories from "@/components/home/Categories";
-import { BannerDuo, BannerWide } from "@/components/home/Banner";
+import Deals from "@/components/home/Deals";
+import { BannerDuo, BannerNight } from "@/components/home/Banner";
+import WinterSection from "@/components/home/WinterSection";
 import Perks from "@/components/home/Perks";
 import Testimonials from "@/components/home/Testimonials";
+import ClubCTA from "@/components/home/ClubCTA";
 import ProductRow from "@/components/product/ProductRow";
-import SectionHead from "@/components/ui/SectionHead";
-import { hotDeals, popular, winter } from "@/lib/catalog";
+import KidsHead from "@/components/kids/KidsHead";
+import ClickSpark from "@/components/effects/ClickSpark";
+import { popular } from "@/lib/catalog";
 
 export default function Home() {
   return (
     <>
+      <ClickSpark />
       <Hero />
+      <FunRibbon />
       <Categories />
-      <section className="container-x py-10">
-        <SectionHead kicker="🔥 تخفیف ویژه" title="تخفیف‌های داغ این هفته" href="/products?deal=1&sort=discount" />
-        <ProductRow items={hotDeals(8)} />
-      </section>
+      <Deals />
       <BannerDuo />
-      <section className="container-x py-10">
-        <SectionHead kicker="⭐ پرطرفدار" title="محبوب‌ترین‌های سین شاپ" href="/products?sort=popular" />
-        <ProductRow items={popular(8)} />
+      <section className="container-x py-12">
+        <KidsHead emoji="👑" kicker="پرطرفدار" title="محبوب‌ترین‌های سین شاپ" href="/products?sort=popular" color="#c9b6ff" />
+        <ProductRow items={popular(8)} fun />
       </section>
-      <BannerWide />
-      <section className="container-x py-10">
-        <SectionHead kicker="❄️ زمستان" title="گرم و نرم برای روزهای سرد" href="/products?q=پتو" />
-        <ProductRow items={winter(8)} />
-      </section>
+      <BannerNight />
+      <WinterSection />
       <Perks />
       <Testimonials />
+      <ClubCTA />
     </>
   );
 }
